@@ -30,6 +30,10 @@ public class Main {
         JButton upTempo = new JButton("Tempo Up");
         upTempo.addActionListener(new MyUpTempoListener());
         buttonBox.add(upTempo);
+        
+        JButton downTempo = new JButton("Tempo Down");
+        downTempo.addActionListener(new MyDownTempoListener());
+        buttonBox.add(downTempo);
 
 
     }
