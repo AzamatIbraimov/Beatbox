@@ -18,6 +18,10 @@ public class Main {
         BorderLayout layout = new BorderLayout();
         JPanel background = new JPanel(layout);
         background.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        
+        Box buttonBox = new Box(BoxLayout.Y_AXIS);
+        JButton start = new JButton("Start");
+        buttonBox.add(start);
 
     }
 }
