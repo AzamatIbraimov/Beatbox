@@ -22,6 +22,10 @@ public class Main {
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
         JButton start = new JButton("Start");
         buttonBox.add(start);
+        
+        JButton stop = new JButton("Stop");
+        stop.addActionListener(new MyStopListener());
+        buttonBox.add(stop);
 
     }
 }
