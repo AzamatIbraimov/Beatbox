@@ -31,6 +31,28 @@ public class Main {
 
         JButton downTempo = new JButton("Tempo Down");
         buttonBox.add(downTempo);
+        
+       
+        background.add(BorderLayout.EAST, buttonBox);
+        background.add(BorderLayout.WEST, nameBox);
+
+        theFrame.getContentPane().add(background);
+        GridLayout grid = new GridLayout(16, 16);
+        grid.setVgap(1);
+        grid.setHgap(2);
+    
+
+        for (int i = 0; i < 256; i++) {
+            JCheckBox c = new JCheckBox();
+            c.setSelected(false);
+
+        }
+
+        theFrame.setBounds(50, 50, 300, 300);
+        theFrame.pack();
+        theFrame.setVisible(true);
+    }
+
 
     }
 }
