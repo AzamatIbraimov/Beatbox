@@ -104,4 +104,10 @@ public class Main {
             sequencer.stop();
         }
     }
+    public class MyUpTempoListener implements ActionListener {
+        public void actionPerformed(ActionEvent a) {
+            float tempoFactor = sequencer.getTempoFactor();
+            sequencer.setTempoFactor((float) (tempoFactor * 1.03));
+        }
+    }
 }
