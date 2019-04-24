@@ -5,6 +5,11 @@ import java.awt.*;
 
 public class Main {
     JFrame theFrame;
+   
+    String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat",
+            "Acoustic Snare", "Crash Cymbal", "Hand Clap", "High Tom", "Hi Bongo",
+            "Maracas", "Whistle", "Low Conga", "Cowbell", "Vibrslap", "Low-mod Tom",
+            "High Agogo", "Open Hi Conga"};
 
 
     public static void main(String[] args) {
