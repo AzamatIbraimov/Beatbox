@@ -94,4 +94,9 @@ public class Main {
         }
         return event;
     }
+    public class MyStartListener implements ActionListener {
+        public void actionPerformed(ActionEvent a) {
+            buildTrackAndStart();
+        }
+    }
 }
