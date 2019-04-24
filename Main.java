@@ -99,4 +99,9 @@ public class Main {
             buildTrackAndStart();
         }
     }
+    public class MyStopListener implements ActionListener {
+        public void actionPerformed(ActionEvent a) {
+            sequencer.stop();
+        }
+    }
 }
