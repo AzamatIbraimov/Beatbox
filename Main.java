@@ -1,12 +1,8 @@
 package YNWA;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.Sequencer;
-import javax.sound.midi.Track;
+import javax.sound.midi.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
 
 public class Main {
     JFrame theFrame;
