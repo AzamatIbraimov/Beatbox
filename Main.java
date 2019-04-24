@@ -116,4 +116,15 @@ public class Main {
             sequencer.setTempoFactor((float) (tempoFactor * .97));
         }
     }
+     public void makeTracks(ArrayList list) {
+        Iterator it = list.iterator();
+        for (int i = 0; i < 16; i++) {
+            Integer num = (Integer) it.next();
+            if (num != null) {
+                int numKey = num.intValue();
+                track.add(makeEvent(144, 9, numKey, 100, i));
+                track.add(makeEvent(128, 9, numKey, 100, i + 1));
+            }
+        }
+    }
 }
