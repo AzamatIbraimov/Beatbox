@@ -60,7 +60,17 @@ public class Main {
         theFrame.pack();
         theFrame.setVisible(true);
     }
-
+    public void setUpMidi() {
+        try {
+            sequencer = MidiSystem.getSequencer();
+            sequencer.open();
+            sequence = new Sequence(Sequence.PPQ, 4);
+            track = sequence.createTrack();
+            sequencer.setTempoInBPM(120);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     }
 }
