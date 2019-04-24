@@ -41,6 +41,9 @@ public class Main {
 
         JButton upTempo = new JButton("Tempo Up");
         buttonBox.add(upTempo);
+        
+        JButton Speed = new JButton("Speed");
+        buttonBox.add(Speed);
 
         JButton downTempo = new JButton("Tempo Down");
         buttonBox.add(downTempo);
