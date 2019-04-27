@@ -19,7 +19,7 @@ public class Main {
 
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat",
             "Acoustic Snare", "Crash Cymbal", "Hand Clap", "High Tom", "Hi Bongo",
-            "Maracas", "Whistle", "Low Conga", "Cowbell", "Vibrslap", "Low-mod Tom",
+            "Maracas", "Whistle", "Low Conga", "Cowbell", "Vibroslap", "Low-mod Tom",
             "High Agogo", "Open Hi Conga"};
 
     int[] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
@@ -31,7 +31,6 @@ public class Main {
     public void startUp() {
         setUpMidi();
         buildGUI();
-
     }
 
     public void buildGUI() {
@@ -44,26 +43,29 @@ public class Main {
 
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
         buttonBox.setMaximumSize(new Dimension(50, 25));
-        JButton start = new JButton("        Start        ");
-        start.setSize(100,100);
+        JButton start = new JButton("Start                ");
         start.addActionListener(new MyStartListener());
         buttonBox.add(start);
 
-        JButton stop = new JButton("Stop");
-        stop.setSize(new Dimension(100, 100));
-        stop.setMinimumSize(new Dimension(50, 25));
+        JButton stop = new JButton("Stop                 ");
         stop.addActionListener(new MyStopListener());
         buttonBox.add(stop);
 
-        JButton upTempo = new JButton("Tempo Up");
-        upTempo.setSize(100,100);
+        JButton upTempo = new JButton("TempoUp       ");
         upTempo.addActionListener(new MyUpTempoListener());
         buttonBox.add(upTempo);
 
-        JButton downTempo = new JButton("Tempo Down");
-        downTempo.setSize(100,100);
+        JButton downTempo = new JButton("TempoDown  ");
         downTempo.addActionListener(new MyDownTempoListener());
         buttonBox.add(downTempo);
+
+        JButton ClearAll = new JButton("Clear               ");
+        ClearAll.addActionListener(e -> {
+            for (JCheckBox chb : checkboxList) {
+                chb.setSelected(false);
+            }
+        });
+        buttonBox.add(ClearAll);
 
         Speed = new JLabel("50");
         Speed.setVisible(true);
@@ -123,7 +125,7 @@ public class Main {
                     int key = instruments[i];
                     trackList.add(key);
                 } else {
-                    trackList.add(null);
+                        trackList.add(null);
                 }
             }
             makeTracks(trackList);
@@ -139,11 +141,11 @@ public class Main {
         }
     }
 
-    public class MyStartListener implements ActionListener {
-        public void actionPerformed(ActionEvent a) {
-            buildTrackAndStart();
-        }
-    }
+//    public class MyStartListener implements ActionListener {
+//        public void actionPerformed(ActionEvent a) {
+//            buildTrackAndStart();
+//        }
+//    }
 
     public class MyStopListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
