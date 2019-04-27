@@ -15,6 +15,7 @@ public class Main {
     Sequence sequence;
     Track track;
     float tempoFactor = 1;
+    JLabel Speed;
 
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat",
             "Acoustic Snare", "Crash Cymbal", "Hand Clap", "High Tom", "Hi Bongo",
@@ -42,13 +43,15 @@ public class Main {
         checkboxList = new ArrayList<JCheckBox>();
 
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
-        JButton start = new JButton("Start");
+        buttonBox.setMaximumSize(new Dimension(50, 25));
+        JButton start = new JButton("        Start        ");
         start.setSize(100,100);
         start.addActionListener(new MyStartListener());
         buttonBox.add(start);
 
         JButton stop = new JButton("Stop");
-        stop.setSize(100,100);
+        stop.setSize(new Dimension(100, 100));
+        stop.setMinimumSize(new Dimension(50, 25));
         stop.addActionListener(new MyStopListener());
         buttonBox.add(stop);
 
@@ -62,8 +65,10 @@ public class Main {
         downTempo.addActionListener(new MyDownTempoListener());
         buttonBox.add(downTempo);
 
-        JLabel speed=new JLabel(String.valueOf(tempoFactor));
-        buttonBox.add(speed);
+        Speed = new JLabel("50");
+        Speed.setVisible(true);
+        buttonBox.add(Speed);
+
 
         Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
@@ -116,7 +121,7 @@ public class Main {
                 JCheckBox jc = (JCheckBox) checkboxList.get(j + (16 * i));
                 if (jc.isSelected()) {
                     int key = instruments[i];
-                    trackList.add(new Integer(key));
+                    trackList.add(key);
                 } else {
                     trackList.add(null);
                 }
@@ -149,14 +154,18 @@ public class Main {
     public class MyUpTempoListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
             tempoFactor = sequencer.getTempoFactor();
-            sequencer.setTempoFactor((float) (tempoFactor * 1.03));
+            double speed = tempoFactor * 1.03;
+            Speed.setText(formatSpeed(speed));
+            sequencer.setTempoFactor((float) (speed));
         }
     }
 
     public class MyDownTempoListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
             tempoFactor = sequencer.getTempoFactor();
-            sequencer.setTempoFactor((float) (tempoFactor * .97));
+            double speed = tempoFactor * .97;
+            Speed.setText(formatSpeed(speed));
+            sequencer.setTempoFactor((float) (speed));
         }
     }
 
@@ -181,6 +190,10 @@ public class Main {
         } catch (Exception e) {
         }
         return event;
+    }
+
+    public String formatSpeed(double speed) {
+        return String.valueOf((int) (speed * 50));
     }
 
 
