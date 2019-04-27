@@ -49,7 +49,6 @@ public class Main {
         checkboxList = new ArrayList<JCheckBox>();
 
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
-        buttonBox.setMaximumSize(new Dimension(50, 25));
         JButton start = new JButton("Start                ");
         start.addActionListener(new MyStartListener());
         buttonBox.add(start);
