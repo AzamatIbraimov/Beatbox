@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 public class Main {
@@ -35,10 +37,15 @@ public class Main {
 
     public void buildGUI() {
         theFrame = new JFrame("BeatBox");
+        theFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+            }
+        });
         BorderLayout layout = new BorderLayout();
         JPanel background = new JPanel(layout);
         background.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
         checkboxList = new ArrayList<JCheckBox>();
 
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
@@ -60,16 +67,17 @@ public class Main {
         buttonBox.add(downTempo);
 
         JButton ClearAll = new JButton("Clear               ");
+        ClearAll.addActionListener(new MyStopListener());
         ClearAll.addActionListener(e -> {
             for (JCheckBox chb : checkboxList) {
                 chb.setSelected(false);
-            }
-        });
+            } });
         buttonBox.add(ClearAll);
 
-        Speed = new JLabel("50");
+        Speed = new JLabel("Speed: 50");
         Speed.setVisible(true);
         buttonBox.add(Speed);
+
 
 
         Box nameBox = new Box(BoxLayout.Y_AXIS);
@@ -141,11 +149,11 @@ public class Main {
         }
     }
 
-//    public class MyStartListener implements ActionListener {
-//        public void actionPerformed(ActionEvent a) {
-//            buildTrackAndStart();
-//        }
-//    }
+    public class MyStartListener implements ActionListener {
+        public void actionPerformed(ActionEvent a) {
+            buildTrackAndStart();
+        }
+    }
 
     public class MyStopListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
@@ -195,8 +203,6 @@ public class Main {
     }
 
     public String formatSpeed(double speed) {
-        return String.valueOf((int) (speed * 50));
+        return "Speed: "+ ((int) (speed * 50));
     }
-
-
 }
