@@ -65,7 +65,7 @@ public class Main {
             } });
         buttonBox.add(ClearAll);
 
-        Speed = new JLabel("Speed: 50");
+        Speed = new JLabel("     Speed: 50%");
         Speed.setVisible(true);
         buttonBox.add(Speed);
 
@@ -194,6 +194,6 @@ public class Main {
     }
 
     public String formatSpeed(double speed) {
-        return "Speed: "+ ((int) (speed * 50));
+        return "     Speed: "+ ((int) (speed * 50)+"%");
     }
 }
