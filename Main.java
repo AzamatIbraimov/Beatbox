@@ -124,12 +124,12 @@ public class Main {
                     int key = instruments[i];
                     trackList.add(key);
                 } else {
-                        trackList.add(null);
+                    trackList.add(null);
                 }
             }
             makeTracks(trackList);
         }
-        track.add(makeEvent(192, 9, 1, 0, 15));
+        track.add(Midi.makeEvent(192, 9, 1, 0, 15));
         try {
             sequencer.setSequence(sequence);
             sequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY);
@@ -156,7 +156,7 @@ public class Main {
         public void actionPerformed(ActionEvent a) {
             tempoFactor = sequencer.getTempoFactor();
             double speed = tempoFactor * 1.03;
-            Speed.setText(formatSpeed(speed));
+            Speed.setText(Format.formatSpeed(speed));
             sequencer.setTempoFactor((float) (speed));
         }
     }
@@ -165,7 +165,7 @@ public class Main {
         public void actionPerformed(ActionEvent a) {
             tempoFactor = sequencer.getTempoFactor();
             double speed = tempoFactor * .97;
-            Speed.setText(formatSpeed(speed));
+            Speed.setText(Format.formatSpeed(speed));
             sequencer.setTempoFactor((float) (speed));
         }
     }
@@ -176,24 +176,9 @@ public class Main {
             Integer num = (Integer) it.next();
             if (num != null) {
                 int numKey = num.intValue();
-                track.add(makeEvent(144, 9, numKey, 100, i));
-                track.add(makeEvent(128, 9, numKey, 100, i + 1));
+                track.add(Midi.makeEvent(144, 9, numKey, 100, i));
+                track.add(Midi.makeEvent(128, 9, numKey, 100, i + 1));
             }
         }
-    }
-
-    public MidiEvent makeEvent(int comd, int chan, int one, int two, int tick) {
-        MidiEvent event = null;
-        try {
-            ShortMessage a = new ShortMessage();
-            a.setMessage(comd, chan, one, two);
-            event = new MidiEvent(a, tick);
-        } catch (Exception e) {
-        }
-        return event;
-    }
-
-    public String formatSpeed(double speed) {
-        return "     Speed: "+ ((int) (speed * 50)+"%");
     }
 }
