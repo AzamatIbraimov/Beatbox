@@ -1,4 +1,4 @@
-package ;
+package YNWA;
 
 import javax.sound.midi.MidiEvent;
 import javax.sound.midi.ShortMessage;
