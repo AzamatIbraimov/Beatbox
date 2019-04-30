@@ -1,4 +1,4 @@
-package beb;
+package YNWA;
 
 public class Format {
     public static String formatSpeed(double speed) {
