@@ -39,6 +39,16 @@ public class Main {
         JPanel background = new JPanel(layout);
         background.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         checkboxList = new ArrayList<JCheckBox>();
+        
+        jFrame.addWindowListener(new WindowAdapter() {
+ 
+@Override
+ 
+public void windowClosing(WindowEvent e) {
+ 
+    System.exit(0);
+ 
+}
 
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
         JButton start = new JButton("Start                ");
