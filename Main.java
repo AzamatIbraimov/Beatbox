@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
 public class Main {
@@ -41,25 +42,57 @@ public class Main {
 
 
         JMenuBar menuBar=new JMenuBar();
-        JMenu menu=new JMenu("Actions");
+
+
+        JMenu menu=new JMenu("Menu");
         menuBar.add(menu);
+
+        JMenuItem opengit=new JMenuItem("My GitHub");
+        opengit.addActionListener(e -> {
+            try {Desktop.getDesktop().browse(new URI("https://github.com/IbraimovAzamat"));
+            } catch (Exception x)
+            {JOptionPane.showMessageDialog(null,e);}
+        });
+        menu.add(opengit);
+
+        JMenuItem about=new JMenuItem("About");
+        about.addActionListener(e -> {
+                JOptionPane.showMessageDialog(null,
+                        "A simple Beatbox program!\n Create your own beats!\n #Java CS-102 project. Enjoy!\n Made by: Azamat Ibraimov.", "About",
+                        JOptionPane.INFORMATION_MESSAGE);
+            });
+        menu.add(about);
+
+
+        JMenuItem exit=new JMenuItem("Exit");
+        exit.addActionListener(e -> {
+            System.exit(1);
+            } );
+        menu.add(exit);
+
+
+
+
+
+
+        JMenu actionsmenu=new JMenu("Actions");
+        menuBar.add(actionsmenu);
         JMenuItem menustart=new JMenuItem("Start");
         menustart.addActionListener(new MyStartListener());
-        menu.add(menustart);
+        actionsmenu.add(menustart);
 
         JMenuItem menustop=new JMenuItem("Stop");
         menustop.addActionListener(new MyStopListener());
-        menu.add(menustop);
-        menu.addSeparator();
+        actionsmenu.add(menustop);
+        actionsmenu.addSeparator();
 
         JMenuItem menutempup=new JMenuItem("Up");
         menutempup.addActionListener(new MyUpTempoListener());
-        menu.add(menutempup);
+        actionsmenu.add(menutempup);
 
         JMenuItem menutempdown=new JMenuItem("Down");
         menutempdown.addActionListener(new MyUpTempoListener());
-        menu.add(menutempdown);
-        menu.addSeparator();
+        actionsmenu.add(menutempdown);
 
         theFrame.setJMenuBar(menuBar);
 
