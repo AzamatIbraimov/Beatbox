@@ -36,15 +36,20 @@ public class Main {
     }
 
     public void buildGUI() {
-        theFrame = new JFrame("Azamat Ibraimov's BeatBox");
+        theFrame = new JFrame("Azamat Ibraimov's BeatBox BETA");
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        JMenuBar menuBar=new JMenuBar();
+        JMenu menu=new JMenu("Menu");
+        menuBar.add(menu);
+        theFrame.setJMenuBar(menuBar);
+
 
 
         BorderLayout layout = new BorderLayout();
         JPanel background = new JPanel(layout);
         background.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-
 
 
         checkboxList = new ArrayList<JCheckBox>();
@@ -68,7 +73,6 @@ public class Main {
         JButton ClearAll = new JButton("Clear               ");
         ClearAll.addActionListener(new MyStopListener());
         ClearAll.addActionListener(e -> {
-            System.out.println(checkboxList);
             for (JCheckBox chb : checkboxList) {
                 chb.setSelected(false);
             } });
@@ -83,7 +87,6 @@ public class Main {
         speedBar.setMaximum(100);
         speedBar.setValue(50);
         buttonBox.add(speedBar);
-
 
 
         Box nameBox = new Box(BoxLayout.Y_AXIS);
