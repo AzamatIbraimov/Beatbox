@@ -41,8 +41,26 @@ public class Main {
 
 
         JMenuBar menuBar=new JMenuBar();
-        JMenu menu=new JMenu("Menu");
+        JMenu menu=new JMenu("Actions");
         menuBar.add(menu);
+        JMenuItem menustart=new JMenuItem("Start");
+        menustart.addActionListener(new MyStartListener());
+        menu.add(menustart);
+
+        JMenuItem menustop=new JMenuItem("Stop");
+        menustop.addActionListener(new MyStopListener());
+        menu.add(menustop);
+        menu.addSeparator();
+
+        JMenuItem menutempup=new JMenuItem("Up");
+        menutempup.addActionListener(new MyUpTempoListener());
+        menu.add(menutempup);
+
+        JMenuItem menutempdown=new JMenuItem("Down");
+        menutempdown.addActionListener(new MyUpTempoListener());
+        menu.add(menutempdown);
+        menu.addSeparator();
+
         theFrame.setJMenuBar(menuBar);
 
 
