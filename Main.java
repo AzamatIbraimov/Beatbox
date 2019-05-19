@@ -16,6 +16,8 @@ public class Main {
     Track track;
     float tempoFactor = 1;
     JLabel Speed;
+    JProgressBar speedBar= new JProgressBar();
+
 
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat",
             "Acoustic Snare", "Crash Cymbal", "Hand Clap", "High Tom", "Hi Bongo",
@@ -34,22 +36,18 @@ public class Main {
     }
 
     public void buildGUI() {
-        theFrame = new JFrame("BeatBox");
+        theFrame = new JFrame("Azamat Ibraimov's BeatBox");
+        theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
         BorderLayout layout = new BorderLayout();
         JPanel background = new JPanel(layout);
         background.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        checkboxList = new ArrayList<JCheckBox>();
-        
-        jFrame.addWindowListener(new WindowAdapter() {
- 
-@Override
- 
-public void windowClosing(WindowEvent e) {
- 
-    System.exit(0);
- 
-}
 
+
+
+
+        checkboxList = new ArrayList<JCheckBox>();
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
         JButton start = new JButton("Start                ");
         start.addActionListener(new MyStartListener());
@@ -70,6 +68,7 @@ public void windowClosing(WindowEvent e) {
         JButton ClearAll = new JButton("Clear               ");
         ClearAll.addActionListener(new MyStopListener());
         ClearAll.addActionListener(e -> {
+            System.out.println(checkboxList);
             for (JCheckBox chb : checkboxList) {
                 chb.setSelected(false);
             } });
@@ -78,6 +77,12 @@ public void windowClosing(WindowEvent e) {
         Speed = new JLabel("     Speed: 50%");
         Speed.setVisible(true);
         buttonBox.add(Speed);
+
+        speedBar.setMaximumSize(new Dimension(200,10));
+        speedBar.setMinimum(0);
+        speedBar.setMaximum(100);
+        speedBar.setValue(50);
+        buttonBox.add(speedBar);
 
 
 
@@ -121,9 +126,10 @@ public void windowClosing(WindowEvent e) {
     }
 
     public void buildTrackAndStart() {
-        ArrayList<Integer> trackList = null;
+        ArrayList<Integer> trackList;
         sequence.deleteTrack(track);
         track = sequence.createTrack();
+
 
         for (int i = 0; i < 16; i++) {
             trackList = new ArrayList<>();
@@ -155,37 +161,35 @@ public void windowClosing(WindowEvent e) {
             buildTrackAndStart();
         }
     }
-
     public class MyStopListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
             sequencer.stop();
         }
     }
-
     public class MyUpTempoListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
             tempoFactor = sequencer.getTempoFactor();
             double speed = tempoFactor * 1.03;
-            Speed.setText(Format.formatSpeed(speed));
+            Speed.setText(Format.formatSpeedString(speed));
             sequencer.setTempoFactor((float) (speed));
+            speedBar.setValue(Format.formatSpeedInt(speed));
         }
     }
-
     public class MyDownTempoListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
             tempoFactor = sequencer.getTempoFactor();
             double speed = tempoFactor * .97;
-            Speed.setText(Format.formatSpeed(speed));
+            Speed.setText(Format.formatSpeedString(speed));
             sequencer.setTempoFactor((float) (speed));
+            speedBar.setValue(Format.formatSpeedInt(speed));
         }
     }
-
     public void makeTracks(ArrayList list) {
         Iterator it = list.iterator();
         for (int i = 0; i < 16; i++) {
             Integer num = (Integer) it.next();
             if (num != null) {
-                int numKey = num.intValue();
+                int numKey = num;
                 track.add(Midi.makeEvent(144, 9, numKey, 100, i));
                 track.add(Midi.makeEvent(128, 9, numKey, 100, i + 1));
             }
