@@ -19,7 +19,6 @@ public class Main {
     float tempoFactor = 1;
     JLabel Speed;
     JProgressBar speedBar= new JProgressBar();
-    ImageIcon icon;
 
 
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat",
@@ -129,7 +128,7 @@ public class Main {
         JButton copy = new JButton("Copy               ");
         copy.addActionListener(new MyCopyListener());
         buttonBox.add(copy);
-       
+
         JButton ClearAll = new JButton("Clear               ");
         ClearAll.addActionListener(new MyStopListener());
         ClearAll.addActionListener(e -> {
@@ -206,6 +205,7 @@ public class Main {
                     trackList.add(null);
                 }
             }
+            System.out.println(trackList);
             makeTracks(trackList);
         }
         track.add(Midi.makeEvent(192, 9, 1, 0, 15));
@@ -247,6 +247,22 @@ public class Main {
             speedBar.setValue(Format.formatSpeedInt(speed));
         }
     }
+
+    public class MyCopyListener implements ActionListener {
+        public void actionPerformed(ActionEvent a) {
+            for (int i = 0; i < checkboxList.size(); i += 16) {
+                for (int j = i; j < i + 4; j++) {
+                    if (checkboxList.get(j).isSelected()) {
+                        (checkboxList.get(j + 4)).setSelected(true);
+                        (checkboxList.get(j + 8)).setSelected(true);
+                        (checkboxList.get(j + 12)).setSelected(true);
+                    }
+                }
+            }
+        }
+    }
+
+
     public void makeTracks(ArrayList list) {
         Iterator it = list.iterator();
         for (int i = 0; i < 16; i++) {
