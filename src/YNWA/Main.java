@@ -126,6 +126,10 @@ public class Main {
         downTempo.addActionListener(new MyDownTempoListener());
         buttonBox.add(downTempo);
 
+        JButton copy = new JButton("Copy               ");
+        copy.addActionListener(new MyCopyListener());
+        buttonBox.add(copy);
+       
         JButton ClearAll = new JButton("Clear               ");
         ClearAll.addActionListener(new MyStopListener());
         ClearAll.addActionListener(e -> {
