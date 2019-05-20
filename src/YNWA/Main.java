@@ -5,10 +5,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
+
 public class Main {
     JFrame theFrame;
     JPanel mainPanel;
@@ -40,6 +44,32 @@ public class Main {
     public void buildGUI() {
         theFrame = new JFrame("Azamat Ibraimov's BeatBox BETA");
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        KeyEventDispatcher keyEventDispatcher = new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(final KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    buildTrackAndStart();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    sequencer.stop();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(1);
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(1);
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(1);
+                }
+                return false;
+            }
+        };
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
+
+
+
 
 
         URL iconURL = getClass().getResource("/icon.png");
@@ -111,7 +141,10 @@ public class Main {
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
         JButton start = new JButton("Start                ");
         start.addActionListener(new MyStartListener());
+        start.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
         buttonBox.add(start);
+
+
 
         JButton stop = new JButton("Stop                 ");
         stop.addActionListener(new MyStopListener());
@@ -205,9 +238,9 @@ public class Main {
                     trackList.add(null);
                 }
             }
-            System.out.println(trackList);
             makeTracks(trackList);
         }
+
         track.add(Midi.makeEvent(192, 9, 1, 0, 15));
         try {
             sequencer.setSequence(sequence);
