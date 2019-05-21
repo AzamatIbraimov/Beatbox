@@ -173,12 +173,17 @@ public class Main {
         Speed = new JLabel("     Speed: 50%");
         Speed.setVisible(true);
         buttonBox.add(Speed);
-
         speedBar.setMaximumSize(new Dimension(200,10));
         speedBar.setMinimum(0);
         speedBar.setMaximum(100);
         speedBar.setValue(50);
         buttonBox.add(speedBar);
+
+        String instruct = "Zdes\nmogla\nbit\nvasha\nreklama!";
+        JTextArea Instructions = new JTextArea(instruct);
+        Instructions.setSize(10,10);
+        buttonBox.add(Instructions);
+
 
 
         Box nameBox = new Box(BoxLayout.Y_AXIS);
